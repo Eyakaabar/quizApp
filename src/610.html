@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>610</title>
+
+  <link rel="stylesheet" href="css/610.css">
+    
+</head>
+<body>
+    <div class="quiz_box">
+        <div id="question_text" >
+            Welche Informationen fehlen für eine vollständige Nachricht?
+        </div> 
+        <div class="post">
+                <img src="img/J_q1_neu.png">
+        </div>
+        <div class="textfield">
+            <input type="text" id="textinput" class="text" placeholder="Bitte geben Sie Ihre Antwort so detailliert wie möglich ein..." 
+            onkeydown="getvalue(this)"/>
+        </div>
+        <!--footer -->
+        <div class="footer">
+            <a href="600.html"><button  type="submit" style='float: left;'>Zurück</button></a>
+            <a href="620.html"><button type="submit" style='float: right;'>Weiter</button></a>
+        </div>
+    </div>
+    <div id="result" class="container result" style="display:none;"></div>
+    <script src="610.js"></script>
+</body>
+</html>
