@@ -1,0 +1,101 @@
+
+.quiz_box{
+	width: 70%;
+	height: 550px;
+	background: #fff;
+    border-radius: 5px;
+    padding:20px 20px 0px 20px;
+}
+.quiz_box{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 
+                0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.question_text{
+    font-size: 15px;
+    font-weight: 200;
+    padding:10px 50px 10px 50px;
+    margin-bottom: 20px;
+    border-bottom: 2px solid lightgrey;}
+.footer{
+	height: 60px;
+	display: flex;
+	justify-content: space-between;
+	width:80%;
+	overflow: auto;
+	white-space: nowrap;
+    margin:10px auto;
+  }	
+.footer button:hover{
+	background: #0263ca;
+}
+.box, .box0{
+    width: 200px;
+    height:250px;
+    border-radius: 10px;
+    border-style:dotted;
+    border-color: grey;
+    cursor: pointer;
+    align-items:center;
+}
+.card-header, .card-body, .card-footer{
+    padding: 2px;
+    height: 40px;
+    line-height:15px;  
+    font-size: small;
+    font-weight: 300;
+    font-style: normal,sans-serif;
+    position: relative;
+}
+.card-header,.card-footer{height:40px;}
+.card{
+    border-radius: 10px;
+}
+.box0{
+    border-color: rgb(255, 253, 253);
+
+}
+.card-body{
+    height:160px;
+}
+
+.iconclass{
+  color:gray;
+  font-weight: bold;
+  font-size: 3em;
+}
+
+/*input{margin-top:60px;
+    margin-left:90px;
+}
+input, label{
+
+    text-align: center;
+}*/
+.questions{
+    margin-top:5px;
+    padding:10px;
+    align-items: center;
+    background-color: white;
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform: translate(-50%, -50%);
+    width:80%;
+    height: 60%;
+    border-radius: 1px;
+    border-style:solid;
+    border-color:blue;
+}
+.radiobutton{
+    position: absolute;
+    top: 80%;
+    left: 50%;
+}
+.hide{
+    display: none;
+}

@@ -1,73 +1,75 @@
-let questions = [
+/* draggable element */
+const item = document.querySelector('.card-body');
+item.addEventListener('dragstart', dragStart);
+function dragStart(e) {
+    e.dataTransfer.setData('text/plain', e.target.id);
+    setTimeout(() => {
+    }, 0);
+}
+/* drop targets */
+const boxes = document.querySelectorAll('.box');
+
+boxes.forEach(box => {
+    box.addEventListener('dragenter', dragEnter)
+    box.addEventListener('dragover', dragOver);
+    box.addEventListener('dragleave', dragLeave);
+    box.addEventListener('drop', drop);
+});
+
+function dragEnter(e) {
+    e.preventDefault();
+}
+
+function dragOver(e) {
+    e.preventDefault();
+}
+
+function dragLeave(e) {
+}
+
+function drop(e) {
+
+    // get the draggable element
+    const id = e.dataTransfer.getData('text/plain');
+    const draggable = document.getElementById(id);
+
+    // add it to the drop target
+    e.target.appendChild(draggable);
+
+    // display the draggable element
+    draggable.classList.remove('hide');
+}
+
+let statements = [
     {   numb: 1,
-        source: "src/img/N_q1_1.png",
-        source_min: "src/img/N_q1_2_min.png",
-        answer: "Werbung",
+        statement: "Es gibt einen einheitlichen Kodex, der Richtlinien für Journalist*innen festlegt.",
+        answer: "1",
     },
     {
         numb: 2,
-        source: "src/img/N_q1_2.png",
-        source_min: "src/img/N_q1_2_min.png",
-        answer: "Werbung",
+        statement: "Es gibt Einrichtungen, bei denen man melden kann, dass Nachrichten nicht korrekt berichtet wurden.",
+        answer: "1",
     },
     {
         numb: 3,
-        source: "src/img/N_q1_3.png",
-        source_min: "src/img/N_q1_3_min.png",
-        answer: "Falschinformation",
+        statement: "Journalist*innen müssen vor der Veröffentlichung von Inhalten überprüfen, wo sie herkommen und ob sie richtig sind.",
+        answer: "1",
     },
     {
         numb: 4,
-        source: "src/img/N_q1_4.png",
-        source_min: "src/img/N_q1_4_min.png",
-        answer: "Falschinformation",
+        statement: "Eine Nachricht über einen Bundesminister darf nur nach Genehmigung durch das Ministerium veröffentlicht werden.",
+        answer: "0",
 
     },
-    {
-        numb: 5,
-        source: "src/img/N_q1_5.png",
-        source_min: "src/img/N_q1_5_min.png",
-        answer: "Meinung",
-    },
-    {
-        numb: 6,
-        source: "src/img/N_q1_6.png",
-        source_min: "src/img/N_q1_6_min.png",
-        answer: "Meinung",
-    },
-    {
-        numb: 7,
-        source: "src/img/N_q1_7.png",
-        source_min: "src/img/N_q1_7_min.png",
-        answer: "Information",
-    },
-    {
-        numb: 8,
-        source: "src/img/N_q1_8.png",
-        source_min: "src/img/N_q1_8_min.png",
-        answer: "Information",
-    },
+    
 ];
 
-let options=["Information","Werbung","Meinung","Falschinformation","weiß nicht"];
 
 //selecting all required elements
-const start_btn = document.querySelector(".start_btn button");
-//const previous_btn = info_box.querySelector(".buttons .zuruck);
-//const next_btn = info_box.querySelector(".buttons .next");
-const quiz_box = document.querySelector(".quiz_box");
+/*const quiz_box = document.querySelector(".quiz_box");
 const result_box = document.querySelector(".result_box");
-const option_list = document.querySelector(".option_list");
+const option_list = document.querySelector(".option_list");*/
 
-
-// if startQuiz button clicked
-start_btn.onclick = ()=>{
-    shuffle(questions);
-    quiz_box.classList.add("activeQuiz"); //show quiz box
-    getNewQuestion(0); //calling showQestions function
-    queCounter(1); //passing 1 parameter to queCounter
-
-}
 
 //let timeValue =  15;
 let que_count = 0;
@@ -76,11 +78,11 @@ let userScore = 0;
 let currentQuestion;
 let availableQuestions=[];
 
-const restart_quiz = result_box.querySelector(".buttons .restart");
-//const quit_quiz = result_box.querySelector(".buttons .quit");
-
 const next_btn = document.querySelector("footer .next_btn");
-const bottom_ques_counter = document.querySelector(".total_que");
+const footer = document.querySelector(".card-footer");
+shuffle(statements);
+    getNewQuestion(0); //calling showQestions function
+    queCounter(1);
 //shuffle the array
 function shuffle(array) {
     var currentIndex = array.length, temporaryValue, randomIndex;
@@ -102,23 +104,14 @@ function shuffle(array) {
 // getting questions and options from array
 function getNewQuestion(index){
     const que_text = document.querySelector(".que_text"); 
-    var post=document.querySelector(".post");
 
-    let img = '<img src="'+ questions[index].source +'">';
-    let option_table = 
-    '<td class="option" scope="col"><span>'+ options[0] +'</span></td>'
-    + '<td class="option" scope="col"><span>'+ options[1] +'</span></td>'
-    + '<td class="option" scope="col" ><span>'+ options[2] +'</span></td>'
-    + '<td class="option" scope="col"><span>'+ options[3] +'</span></td>'
-    + '<td class="option" scope="col"><span>'+ options[4] +'</span></td>';
-    option_list.innerHTML = option_table; //adding new div tag inside option_tag
-    post.innerHTML = img; //adding new span tag inside que_tag
-    const option = option_list.querySelectorAll(".option");
+    let card = 
+    '<p class="card-text"><div class="quesnumber">'+statements[index].statement +'</div></p>'+
+    '</div>';
 
-    //set onclick attribute to all available options
-    for(i=0; i < option.length; i++){
-        option[i].setAttribute("onclick", "optionSelected(this)");
-    }
+
+    item.innerHTML = card; //adding new div tag inside option_tag
+    
 }
 //if user clicked on option
 function optionSelected(answer){
@@ -169,7 +162,6 @@ function optionSelected(answer){
 
 function queCounter(index){
     //creating a new span tag and passing the question number and total question
-    let totalQueCounTag = '<span><b>'+ index +'/'+ questions.length +'</b></span>';
-    bottom_ques_counter.innerHTML = totalQueCounTag;  //adding new span tag inside bottom_ques_counter
+    let totalQueCounTag = '<span><b>'+ index +'/'+ statements.length +'</b></span>';
+    footer.innerHTML = totalQueCounTag;  //adding new span tag inside bottom_ques_counter
 }
-
